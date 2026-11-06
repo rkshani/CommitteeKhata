@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">کمیٹی کھاتہ</string>
+
+    <!-- Common -->
+    <string name="back">واپس</string>
+    <string name="cancel">منسوخ</string>
+    <string name="save">محفوظ کریں</string>
+    <string name="delete">حذف کریں</string>
+    <string name="undo">واپس لیں</string>
+    <string name="yes">ہاں</string>
+    <string name="no">نہیں</string>
+    <string name="settings">ترتیبات</string>
+    <string name="currency_format">%1$s روپے</string>
+    <string name="currency_prefix">روپے </string>
+
+    <!-- Home -->
+    <string name="new_committee">نئی کمیٹی</string>
+    <string name="active_committees">جاری کمیٹیاں</string>
+    <string name="unpaid_this_month">اس مہینے باقی</string>
+    <string name="empty_committees_title">ابھی کوئی کمیٹی نہیں</string>
+    <string name="empty_committees_message">اپنی پہلی کمیٹی شروع کرنے کے لیے \"نئی کمیٹی\" دبائیں۔</string>
+    <string name="no_members">کوئی ممبر نہیں</string>
+    <string name="completed">مکمل</string>
+    <string name="not_started">شروع نہیں ہوئی</string>
+    <string name="all_paid">سب نے ادا کر دیا</string>
+    <string name="amount_x_members">%1$s × %2$d ممبر</string>
+    <string name="month_x_of_y">مہینہ %1$d از %2$d</string>
+    <string name="pot_value">کمیٹی %1$s</string>
+    <string name="next_turn_value">اگلی باری: %1$s (%2$s)</string>
+    <plurals name="unpaid_count">
+        <item quantity="one">%d باقی</item>
+        <item quantity="other">%d باقی</item>
+    </plurals>
+
+    <!-- Add / edit committee -->
+    <string name="edit_committee">کمیٹی میں ترمیم</string>
+    <string name="committee_name">کمیٹی کا نام</string>
+    <string name="committee_name_hint">مثلاً فیملی کمیٹی 2026</string>
+    <string name="amount_per_member">ہر ممبر کی رقم (ماہانہ)</string>
+    <string name="amount_help">ہر ممبر یہ رقم ہر مہینے دے گا۔</string>
+    <string name="start_month">شروع کا مہینہ</string>
+    <string name="start_month_help">ممبر نمبر 1 کو اس مہینے کمیٹی ملے گی، نمبر 2 کو اگلے مہینے، اسی طرح آگے۔</string>
+    <string name="previous_month">پچھلا مہینہ</string>
+    <string name="next_month">اگلا مہینہ</string>
+    <string name="notes_optional">نوٹس (اختیاری)</string>
+    <string name="error_name_required">براہ کرم نام لکھیں</string>
+    <string name="error_amount_required">براہ کرم رقم لکھیں</string>
+
+    <!-- Detail -->
+    <string name="tab_overview">خلاصہ</string>
+    <string name="tab_members">ممبران</string>
+    <string name="tab_payments">ادائیگیاں</string>
+    <string name="share_report">پی ڈی ایف رپورٹ شیئر کریں</string>
+    <string name="delete_committee">کمیٹی حذف کریں</string>
+    <string name="delete_committee_message">کمیٹی، تمام ممبران اور تمام ادائیگیوں کا ریکارڈ حذف ہو جائے گا۔ یہ واپس نہیں ہو سکتا۔</string>
+    <string name="committee_completed">کمیٹی مکمل ہو گئی</string>
+    <string name="starts_on">%1$s میں شروع ہو گی</string>
+    <string name="pot_per_month">ماہانہ کمیٹی کی رقم</string>
+    <string name="payouts_done">%2$d میں سے %1$d ممبران کو کمیٹی مل چکی</string>
+    <string name="this_month_title">اس مہینے · %1$s</string>
+    <string name="receiver">کمیٹی کس کو ملے گی</string>
+    <string name="collected">جمع شدہ</string>
+    <string name="not_paid_yet">ابھی ادا نہیں کیا:</string>
+    <string name="open_payments">ادائیگیاں کھولیں</string>
+    <string name="next_turn">اگلی باری</string>
+    <string name="pending_payments">باقی ادائیگیاں</string>
+    <string name="no_pending">کوئی ادائیگی باقی نہیں۔ بہت خوب!</string>
+    <string name="summary">تفصیل</string>
+    <string name="members">ممبران</string>
+    <string name="end_month">آخری مہینہ</string>
+    <string name="total_collected">کل جمع شدہ</string>
+    <string name="status">حالت</string>
+    <plurals name="months_pending">
+        <item quantity="one">%d مہینہ باقی</item>
+        <item quantity="other">%d مہینے باقی</item>
+    </plurals>
+
+    <!-- Members -->
+    <string name="add_member">ممبر شامل کریں</string>
+    <string name="edit_member">ممبر میں ترمیم</string>
+    <string name="member_name">نام</string>
+    <string name="phone">فون</string>
+    <string name="phone_optional">فون (اختیاری)</string>
+    <string name="delete_member">ممبر حذف کریں</string>
+    <string name="delete_member_message">%1$s اور ان کی تمام ادائیگیاں حذف کریں؟</string>
+    <string name="no_members_title">ابھی کوئی ممبر نہیں</string>
+    <string name="no_members_message">ممبران کو ان کی باری کی ترتیب سے شامل کریں۔ نمبر 1 کو کمیٹی سب سے پہلے ملے گی۔</string>
+    <string name="order_help">نمبر باری کی ترتیب ہے۔ ترتیب بدلنے کے لیے تیر دبائیں۔ ترمیم کے لیے ممبر پر دبائیں۔</string>
+    <string name="received_in">مل گئی · %1$s</string>
+    <string name="turn_in">باری · %1$s</string>
+    <string name="move_up">اوپر کریں</string>
+    <string name="move_down">نیچے کریں</string>
+
+    <!-- Payments -->
+    <string name="paid_members">ادا کرنے والے ممبران</string>
+    <string name="give_payout_to">کمیٹی %1$s کو دیں</string>
+    <string name="payout_given_to">کمیٹی %1$s کو دے دی گئی</string>
+    <string name="payout_warning_unpaid">کچھ ممبران نے اس مہینے ابھی ادائیگی نہیں کی۔</string>
+    <string name="undo_payout">کمیٹی کی ادائیگی واپس لیں؟</string>
+    <string name="undo_payout_message">اس مہینے کو \"کمیٹی نہیں دی گئی\" لکھا جائے گا۔</string>
+    <string name="tap_to_mark">ادا / باقی کرنے کے لیے ممبر پر دبائیں</string>
+    <string name="mark_all_paid">سب کو ادا شدہ کریں</string>
+    <string name="paid">ادا شدہ</string>
+    <string name="unpaid">باقی</string>
+    <string name="pending">باقی</string>
+
+    <!-- Messages -->
+    <string name="msg_member_added">ممبر شامل ہو گیا</string>
+    <string name="msg_payout_saved">کمیٹی کی ادائیگی محفوظ ہو گئی</string>
+    <string name="msg_cannot_delete_member">کسی کو کمیٹی ملنے کے بعد ممبر حذف نہیں ہو سکتا۔</string>
+    <string name="msg_cannot_reorder">جس ممبر کو کمیٹی مل چکی اس کی باری نہیں بدل سکتی۔</string>
+    <string name="msg_add_members_first">پہلے ممبران شامل کریں۔</string>
+
+    <!-- Report -->
+    <string name="report_generated_on">رپورٹ کی تاریخ: %1$s</string>
+    <string name="turn_month">باری کا مہینہ</string>
+    <string name="pot_received">کمیٹی ملی</string>
+    <string name="payment_record">ادائیگیوں کا ریکارڈ (مہینہ نمبر کے حساب سے)</string>
+    <string name="grid_legend">سبز = ادا شدہ · سرخ دائرہ = واجب، ادا نہیں · سرمئی = ابھی واجب نہیں</string>
+
+    <!-- Settings -->
+    <string name="language">زبان</string>
+    <string name="language_help">پوری ایپ ایک وقت میں ایک ہی زبان استعمال کرتی ہے۔</string>
+    <string name="about">ایپ کے بارے میں</string>
+    <string name="version">ورژن</string>
+    <string name="offline_note">تمام ڈیٹا صرف اسی فون میں محفوظ ہوتا ہے۔ انٹرنیٹ کی ضرورت نہیں۔</string>
+</resources>
