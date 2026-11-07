@@ -1,9 +1,7 @@
 package com.rk.committee.ui.theme
 
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Typography
-import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
@@ -35,35 +33,10 @@ private val LightColors = lightColorScheme(
     onErrorContainer = Color(0xFF410002),
 )
 
-private val DarkColors = darkColorScheme(
-    primary = Color(0xFF7FD8B0),
-    onPrimary = Color(0xFF003826),
-    primaryContainer = Color(0xFF00513A),
-    onPrimaryContainer = Color(0xFFB8F0D8),
-    secondary = Color(0xFFF5BD6B),
-    onSecondary = Color(0xFF462A00),
-    secondaryContainer = Color(0xFF643F00),
-    onSecondaryContainer = Color(0xFFFFDDB0),
-    tertiary = Color(0xFFA5CCDF),
-    background = Color(0xFF101512),
-    onBackground = Color(0xFFDFE4DF),
-    surface = Color(0xFF101512),
-    onSurface = Color(0xFFDFE4DF),
-    surfaceVariant = Color(0xFF404943),
-    onSurfaceVariant = Color(0xFFBFC9C1),
-    surfaceContainerLow = Color(0xFF181D1A),
-    surfaceContainer = Color(0xFF1C211E),
-    surfaceContainerHigh = Color(0xFF262B28),
-    outline = Color(0xFF8A938C),
-    error = Color(0xFFFFB4AB),
-    errorContainer = Color(0xFF93000A),
-    onErrorContainer = Color(0xFFFFDAD6),
-)
-
 @Composable
 fun CommitteeTheme(content: @Composable () -> Unit) {
     MaterialTheme(
-        colorScheme = if (isSystemInDarkTheme()) DarkColors else LightColors,
+        colorScheme = LightColors, // app is light-only; dark/night mode is not supported
         typography = Typography(),
         content = content,
     )
