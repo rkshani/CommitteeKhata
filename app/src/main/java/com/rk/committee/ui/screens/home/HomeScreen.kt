@@ -15,8 +15,13 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.automirrored.filled.ExitToApp
 import androidx.compose.material.icons.filled.Groups
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.PrivacyTip
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.StarRate
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -24,12 +29,28 @@ import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalDrawerSheet
+import androidx.compose.material3.ModalNavigationDrawer
+import androidx.compose.material3.NavigationDrawerItem
+import androidx.compose.material3.NavigationDrawerItemDefaults
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
+import android.app.Activity
+import android.content.ActivityNotFoundException
+import android.content.Context
+import android.content.ContextWrapper
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.pluralStringResource
@@ -53,6 +74,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -71,47 +93,120 @@ fun HomeScreen(
     vm: HomeViewModel = hiltViewModel(),
 ) {
     val list by vm.committees.collectAsStateWithLifecycle()
+    val context = LocalContext.current
+    val drawerState = rememberDrawerState(DrawerValue.Closed)
+    val scope = rememberCoroutineScope()
+    fun closeThen(action: () -> Unit) {
+        scope.launch { drawerState.close() }
+        action()
+    }
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text(stringResource(R.string.app_name), fontWeight = FontWeight.Bold) },
-                actions = {
-                    IconButton(onClick = onSettings) {
-                        Icon(Icons.Filled.Settings, stringResource(R.string.settings))
+    ModalNavigationDrawer(
+        drawerState = drawerState,
+        drawerContent = {
+            ModalDrawerSheet {
+                Text(
+                    stringResource(R.string.app_name),
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(horizontal = 28.dp, vertical = 24.dp),
+                )
+                HorizontalDivider()
+                Spacer(Modifier.height(12.dp))
+                DrawerItem(Icons.Filled.Home, stringResource(R.string.drawer_home), selected = true) {
+                    closeThen {}
+                }
+                DrawerItem(Icons.Filled.StarRate, stringResource(R.string.drawer_rate_us)) {
+                    closeThen { openPlayStore(context) }
+                }
+                DrawerItem(Icons.Filled.PrivacyTip, stringResource(R.string.drawer_privacy_policy)) {
+                    closeThen { openUrl(context, PRIVACY_POLICY_URL) }
+                }
+                DrawerItem(Icons.AutoMirrored.Filled.ExitToApp, stringResource(R.string.drawer_exit)) {
+                    closeThen { context.findActivity()?.finishAffinity() }
+                }
+            }
+        },
+    ) {
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    title = { Text(stringResource(R.string.app_name), fontWeight = FontWeight.Bold) },
+                    navigationIcon = {
+                        IconButton(onClick = { scope.launch { drawerState.open() } }) {
+                            Icon(Icons.Filled.Menu, stringResource(R.string.open_menu))
+                        }
+                    },
+                    actions = {
+                        IconButton(onClick = onSettings) {
+                            Icon(Icons.Filled.Settings, stringResource(R.string.settings))
+                        }
+                    },
+                )
+            },
+            floatingActionButton = {
+                ExtendedFloatingActionButton(
+                    onClick = onAdd,
+                    icon = { Icon(Icons.Filled.Add, null) },
+                    text = { Text(stringResource(R.string.new_committee)) },
+                )
+            },
+        ) { padding ->
+            val items = list
+            when {
+                items == null -> LoadingBox(Modifier.padding(padding))
+                items.isEmpty() -> EmptyState(
+                    icon = Icons.Filled.Groups,
+                    title = stringResource(R.string.empty_committees_title),
+                    message = stringResource(R.string.empty_committees_message),
+                    modifier = Modifier.padding(padding),
+                )
+                else -> LazyColumn(
+                    modifier = Modifier.fillMaxSize().padding(padding),
+                    contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 96.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                ) {
+                    item { SummaryHeader(items) }
+                    items(items, key = { it.committee.id }) { d ->
+                        CommitteeCard(d, onClick = { onOpen(d.committee.id) })
                     }
-                },
-            )
-        },
-        floatingActionButton = {
-            ExtendedFloatingActionButton(
-                onClick = onAdd,
-                icon = { Icon(Icons.Filled.Add, null) },
-                text = { Text(stringResource(R.string.new_committee)) },
-            )
-        },
-    ) { padding ->
-        val items = list
-        when {
-            items == null -> LoadingBox(Modifier.padding(padding))
-            items.isEmpty() -> EmptyState(
-                icon = Icons.Filled.Groups,
-                title = stringResource(R.string.empty_committees_title),
-                message = stringResource(R.string.empty_committees_message),
-                modifier = Modifier.padding(padding),
-            )
-            else -> LazyColumn(
-                modifier = Modifier.fillMaxSize().padding(padding),
-                contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 96.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp),
-            ) {
-                item { SummaryHeader(items) }
-                items(items, key = { it.committee.id }) { d ->
-                    CommitteeCard(d, onClick = { onOpen(d.committee.id) })
                 }
             }
         }
     }
+}
+
+private const val PRIVACY_POLICY_URL = "https://sites.google.com/view/commetti-khata-app/home"
+
+@Composable
+private fun DrawerItem(icon: ImageVector, label: String, selected: Boolean = false, onClick: () -> Unit) {
+    NavigationDrawerItem(
+        icon = { Icon(icon, null) },
+        label = { Text(label) },
+        selected = selected,
+        onClick = onClick,
+        modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding),
+    )
+}
+
+private fun openUrl(context: Context, url: String): Boolean = try {
+    context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+    true
+} catch (_: ActivityNotFoundException) {
+    false
+}
+
+private fun openPlayStore(context: Context) {
+    val pkg = context.packageName
+    if (!openUrl(context, "market://details?id=$pkg")) {
+        openUrl(context, "https://play.google.com/store/apps/details?id=$pkg")
+    }
+}
+
+private tailrec fun Context.findActivity(): Activity? = when (this) {
+    is Activity -> this
+    is ContextWrapper -> baseContext.findActivity()
+    else -> null
 }
 
 @Composable
