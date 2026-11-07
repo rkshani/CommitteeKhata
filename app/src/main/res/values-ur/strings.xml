@@ -14,6 +14,13 @@
     <string name="currency_format">%1$s روپے</string>
     <string name="currency_prefix">روپے </string>
 
+    <!-- Drawer -->
+    <string name="drawer_home">ہوم</string>
+    <string name="drawer_rate_us">ریٹ کریں</string>
+    <string name="drawer_privacy_policy">پرائیویسی پالیسی</string>
+    <string name="drawer_exit">باہر نکلیں</string>
+    <string name="open_menu">مینو کھولیں</string>
+
     <!-- Home -->
     <string name="new_committee">نئی کمیٹی</string>
     <string name="active_committees">جاری کمیٹیاں</string>
