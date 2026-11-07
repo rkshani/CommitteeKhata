@@ -17,6 +17,13 @@
     <string name="currency_format">Rs %1$s</string>
     <string name="currency_prefix">Rs </string>
 
+    <!-- Drawer -->
+    <string name="drawer_home">Home</string>
+    <string name="drawer_rate_us">Rate us</string>
+    <string name="drawer_privacy_policy">Privacy policy</string>
+    <string name="drawer_exit">Exit</string>
+    <string name="open_menu">Open menu</string>
+
     <!-- Home -->
     <string name="new_committee">New committee</string>
     <string name="active_committees">Active committees</string>
